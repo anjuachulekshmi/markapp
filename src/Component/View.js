@@ -1,26 +1,19 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
 import Header from './Header'
 const View = () => {
-    var viewmark=[
-        { 
-            "name":"anju",
-            "admnno":"1000",
-            "cgpa":"8.3",
-            
-
-        },
-        {"name":"anila",
-        "admnno":"1002",
-        "cgpa":"8.5",
-       
-    },
-    {"name":"kavya",
-    "admnno":"1003",
-    "cgpa":"8.4",
+    var [viewstd,setstd]=useState([])
+    
+    axios.get("http://localhost:4000/api/viewall").then(
+        (response)=>{
+            console.log(response.data)
+            setstd(response.data)
+           
+        }
+    )
    
 
-    }
-    ]
+    
 
   return (
     <div>
@@ -42,11 +35,13 @@ const View = () => {
                                  </thead>
                                  <tbody>
                                           {
-                                           viewmark.map((value,key)=>{
+                                          viewstd.map((value,key)=>{
                                                 return <tr>
                                                 <th><p class="card-text">{value.name}</p></th>
                                                 <td><p class="card-text">{value.admnno}</p></td>
                                                 <td><p class="card-text">{value.cgpa}</p></td>
+                                                
+
                                                 
 
                                                 </tr>
